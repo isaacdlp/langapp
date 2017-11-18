@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LanGame</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="outerCanvas">
+<div id="innerCanvas">
+<div id="langTitle">Welcome to the Game!</div>
+
+<div id="langParams">
+<form id="formParams">
+    <span id="spPlayIn">Play in</span>
+    <select id="selLangIndex">
+        <optgroup>
+            <option id="selEN" value="EN" selected>[EN] English</option>
+            <option id="selPT" value="PT">[PT] Portuguese</option>
+            <option id="selES" value="ES">[ES] Spanish</option>
+            <option id="selIT" value="IT">[IT] Italian</option>
+            <option id="selCA" value="CA">[CA] Catalan</option>
+            <option id="selFR" value="FR">[FR] French</option>
+            <option id="selRU" value="RU">[RU] Russian</option>
+        </optgroup>
+    </select>
+    <span id="spWith">with</span>
+    <span id="chckChoices">
+        <input id="chkEN" type="checkbox" checked="true" /> EN
+        <input id="chkPT" type="checkbox" checked="true" /> PT
+        <input id="chkES" type="checkbox" checked="true" /> ES
+        <input id="chkIT" type="checkbox" checked="true" /> IT
+        <input id="chkCA" type="checkbox" checked="true" /> CA
+        <input id="chkFR" type="checkbox" checked="true" /> FR
+        <input id="chkRU" type="checkbox" checked="true" /> RU
+    </span>
+    <input id="btnPlay" type="button" value="Play!" onclick="doStart()"/>
+</form>
+</div>
+<div id="langPoints" class="langDiv">
+    Points [0] Rounds [0] Accuracy [0%]
+</div>
+<div id="langResult" class="langDiv">
+    Waiting to solve...
+</div>
+<div id="langQuestion" class="langDiv">
+    Waiting for the question
+</div>
+<form id="formAnswer" onsubmit="return doSolve();">
+    <div id="langAnswer" class="langDiv">
+        <input type="text" id="textAnswer" placeholder="Answer here..."></input>
+    </div>
+    <a id="btnAnswer" class="langButton" class="langDiv" href="javascript:doSolve()">Solve!</a>
+</form>
+<link rel="stylesheet" type="text/css" href="res/langame.css"/>
+<script src="res/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="res/langame.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    doReady();
+});
+</script>
+</div>
+</div>
+</body>
+</html>

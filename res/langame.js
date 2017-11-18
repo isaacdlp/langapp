@@ -1,0 +1,253 @@
+String.prototype.format = String.prototype.f = function() {
+    var s = this, i = arguments.length;
+    while (i--) {
+        s = s.replace(new RegExp('\\{' + i + '\\}', 'gm'), arguments[i]);
+    }
+    return s;
+};
+
+function random(obj) {
+    return obj[Math.floor(Math.random() * obj.length)];
+}
+
+function getQueryParam(param) {
+    var vars = {};
+    window.location.href.replace( location.hash, '' ).replace(
+        /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+        function( m, key, value ) { // callback
+            vars[key] = value !== undefined ? value : '';
+        }
+    );
+
+    if ( param ) {
+        return vars[param] ? vars[param] : null;
+    }
+    return vars;
+}
+
+function _(text) {
+    if (lang_index in i18n) {
+        if (text in i18n[lang_index]) {
+            return i18n[lang_index][text];
+        }
+    }
+    return text;
+}
+
+desktopApp = true;
+status = 0;
+/*
+   0: Generating round
+   1: Round ready to play
+   2: Gender ready to guess
+*/
+
+i18n = { };
+idioms = ["EN", "PT", "ES", "IT", "CA", "FR", "RU"];
+genders = {
+    "M": "M, М",
+    "F": "F, Ф, Ж",
+    "N": "N, Н"
+};
+
+note_reg = /\(([^\)]*)\)/g;
+clean_reg = /[^a-z\u00E0-\u00FCа-я]+/ig;
+normal_reg = /[\u0300-\u036f]/g;
+normal_repl = [
+    ["á","a"],["â","a"],["à","a"],["ä","a"],["ã","a"],
+    ["é","e"],["ê","e"],["è","e"],["ë","e"],["e","e"],
+    ["í","i"],["î","i"],["ì","i"],["ï","i"],
+    ["ó","o"],["ô","o"],["ò","o"],["ö","o"],["õ","o"],
+    ["ú","u"],["û","u"],["ù","u"],["ü","u"]
+];
+repeat_reg = /(.)\1{2,}/g;
+replacements = [["й", "и"], ["ы", "и"], ["щ", "ш"], ["в", "б"]];
+
+function doStart() {
+    rounds = 0;
+    score = 0.0;
+    points = 0;
+
+    lang_index = $("select#selLangIndex option:selected")[0].value;
+    lang_focus = [];
+    for (num in idioms) {
+        idiom = idioms[num];
+        if($("input#chk" + idiom)[0].checked) {
+            lang_focus.push(idiom);
+        }
+    }
+
+    num = $.inArray(lang_index, lang_focus);
+    if (num > -1) {
+        lang_focus.splice(num, 1);
+    }
+
+    used = [];
+
+    $("div#langTitle")[0].innerHTML = _("Welcome to the Game!");
+    $("span#spPlayIn")[0].innerHTML = _("Play in");
+    $("span#spWith")[0].innerHTML = _("with");
+    $("input#btnPlay")[0].value = _("Play!");
+    elem = $("#langResult");
+    elem[0].innerHTML = _("Waiting to solve...");
+    elem.css("background-color", "lightyellow");
+    $("div#langQuestion")[0].innerHTML = _("Waiting for the question");
+    $("input#textAnswer")[0].placeholder = _("Answer here...");
+    $("a#btnAnswer")[0].innerHTML = _("Solve!");
+
+    doRound();
+}
+
+function doRound() {
+    status = 0;
+
+    concept = null;
+    lang = null;
+    sym = null;
+    gen = null;
+
+    for (i=0; i < 100; i++) {
+        word = random(words);
+        langs = Object.keys(word);
+        if ($.inArray(lang_index, langs) != -1) {
+            concept = word[lang_index][0];
+            delete langs[lang_index];
+            lang = random(langs).toUpperCase();
+            if (lang_focus.length == 0 || ($.inArray(lang, lang_focus) != -1)) {
+                pair = concept + "@" + lang;
+                if ($.inArray(pair, used) == -1) {
+                    used.push(pair);
+                    var con = word[lang];
+                    sym = con[0];
+                    gen = null;
+                    gen = null;
+                    if (con.length > 1) {
+                        gen = con[1];
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    var accuracy = 0;
+    if (rounds > 0) {
+        accuracy = (score / rounds) * 100;
+    }
+    $("div#langPoints")[0].innerHTML = _("Points {0} Rounds {1} Accuracy {2}%").format(score, rounds, accuracy.toFixed(2));
+    rounds += 1;
+
+    var teaser = _("Not enough words!");
+    if (sym != null) {
+        teaser = _("'{0}' in {1}").format(concept, lang);
+        status = 1;
+    }
+    $("div#langQuestion")[0].innerHTML = teaser;
+}
+
+function doClean(text) {
+    text = text.replace(note_reg, "").toLowerCase();
+    return text.replace(clean_reg, "");
+}
+
+function doNormal(text) {
+    if (desktopApp) {
+        text = text.normalize('NFD').replace(normal_reg, "");
+    } else {
+        for (var num in normal_repl) {
+            repl = normal_repl[num];
+            text = text.replace(repl[0], repl[1])
+        }
+    }
+    for (var num in replacements) {
+        replacement = replacements[num];
+        text = text.replace(replacement[0], replacement[1])
+    }
+    return text.replace(repeat_reg, '$1');
+}
+
+function doEval(guess, solutions) {
+    match = _("WRONG");
+    pts = 0;
+    col = "lightpink";
+    clean_guess = doClean(guess);
+    normal_guess = doNormal(clean_guess);
+    sols = solutions.split(", ");
+    for (num in sols) {
+        sol = sols[num];
+        clean_sol = doClean(sol);
+        if (clean_guess == clean_sol) {
+            match = _("RIGHT");
+            pts = 0.5;
+            col = "lightgreen";
+            break;
+        } else {
+            normal_sol = doNormal(clean_sol);
+            if (normal_guess == normal_sol) {
+                match = _("ALMOST");
+                pts = 0.25;
+                col = "lightyellow";
+            }
+        }
+    }
+    return [match, pts, col];
+}
+
+function doSolve() {
+    var guess = $("#textAnswer")[0].value;
+    $("#textAnswer")[0].value = "";
+    if (guess) {
+        elem = $("#langResult");
+        if (status == 1) {
+            var tuple = doEval(guess, sym);
+            points = tuple[1];
+            elem[0].innerHTML = _("{0}! It is '{1}'").format(tuple[0], sym);
+            elem.css("background-color", tuple[2]);
+            if (gen != null) {
+                $("#langQuestion")[0].innerHTML = _("Which gender is it? [M]asculine, [N]eutral or [F]emenine?");
+                status = 2;
+            } else {
+                points *= 2;
+                score += points;
+                doRound();
+            }
+        } else if (status == 2) {
+            var tuple = doEval(guess, genders[gen]);
+            points += tuple[1];
+            elem[0].innerHTML = _("{0}! It is '{1}'").format(tuple[0], gen);
+            elem.css("background-color", tuple[2]);
+            score += points;
+            doRound();
+        }
+    }
+    return false;
+}
+
+function doReady() {
+    q_params = getQueryParam();
+    if ("lang" in q_params) {
+        var idi = q_params["lang"].toUpperCase();
+        var sel = $("select#selLangIndex option#sel" + idi);
+        if (sel.length > 0) {
+            sel[0].selected = true;
+        }
+    }
+    if ("list" in q_params) {
+        var idis = q_params["list"].toUpperCase().split(",").map(function (el) {
+            return "chk" + el
+        });
+        var checks = $("#chckChoices input");
+        for (num in checks) {
+            if ($.inArray(checks[num].id, idis) < 0) {
+                checks[num].checked = false;
+            }
+        }
+    }
+    $.getJSON("res/i18n.json", function (data) {
+        i18n = data;
+        $.getJSON("langame/langame.json", function (data) {
+            words = data;
+            doStart();
+        })
+    });
+}
