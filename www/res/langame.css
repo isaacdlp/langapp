@@ -1,0 +1,106 @@
+body {
+    background-color: white;
+    text-align: center;
+    font-family: Lucida Sans Unicode;
+    margin: 0px;
+    padding: 0px;
+    color: black;
+    font-size: 14px;
+}
+#outerCanvas {
+    background-color: white;
+    position : absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top : 0;
+    left : 0;
+    right : 0;
+    bottom : 0;
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+}
+#innerCanvas {
+    width: 100%;
+}
+.langDiv {
+    display: block;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 25px;
+    margin: 20px;
+    padding: 20px;
+}
+
+#langTitle {
+    margin: 0px;
+    padding: 20px;
+    font-size: 20px;
+}
+
+#chckChoices {
+    display: block;
+    white-space: nowrap;
+    margin: 5px 0px;
+}
+
+#langParams {
+    font-family: Lucida Sans Unicode;
+    margin: 0px;
+    padding: 0px 20px;
+    font-size: 14px;
+}
+
+#langQuestion {
+    background-color: lavender;
+}
+
+#langResult {
+    background-color: lightyellow;
+}
+
+#langAnswer {
+    background-color: aliceblue;
+}
+
+#textAnswer {
+    background-color: aliceblue;
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: Lucida Sans Unicode;
+    font-size: 14px;
+}
+
+.langButton{
+    display: block;
+    border: 2px solid black;
+    border-radius: 25px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+}
+
+#btnAnswer {
+    background-color: lightgreen;
+    font-size: 14px;
+}
+
+#btnAnswer:hover{
+    background-color: limegreen;
+}
+
+@media screen and (min-width: 550px) {
+    #chckChoices {
+        display: inline;
+    }
+    body, #langTitle, #textAnswer, #btnAnswer {
+        font-size: 25px;
+    }
+
+}
