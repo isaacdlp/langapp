@@ -1,7 +1,15 @@
-# LangApp
+# LangSite
 
-Mobile App for LanGame, created with [Apache Cordova](https://cordova.apache.org)
+Website for LanGame
 
 Main project:
 
 https://github.com/isaacdlp/langame
+
+Demo site:
+
+http://alternativeinsights.ai/game
+
+http://alternativeinsights.ai/game?lang=RU
+
+http://alternativeinsights.ai/game?lang=RU&list=EN,IT,PT

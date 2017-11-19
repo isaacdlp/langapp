@@ -12,3 +12,8 @@ pom.xml.asc
 .lein-plugins/
 .lein-failures
 .nrepl-port
+/.htaccess
+/license.txt
+/readme.html
+/sitemap.xml
+/sitemap.xml.gz
