@@ -1,106 +1,105 @@
-body {
+body, html {
     background-color: white;
     text-align: center;
-    font-family: Lucida Sans Unicode;
-    margin: 0px;
-    padding: 0px;
+    font-family: Lucida Sans Unicode, Lucida, Arial;
     color: black;
     font-size: 14px;
+    margin: 0;
+    padding: 0;
 }
 #outerCanvas {
     background-color: white;
-    position : absolute;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    top : 0;
-    left : 0;
-    right : 0;
-    bottom : 0;
-    width:100%;
-    height:100%;
-    margin:0;
-    padding:0;
+    min-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
 }
 #innerCanvas {
-    width: 100%;
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
 }
 .langDiv {
     display: block;
     text-align: center;
     border: 2px solid black;
     border-radius: 25px;
-    margin: 20px;
-    padding: 20px;
+    margin: 10px 5px;
+    padding: 10px 5px;
 }
-
 #langTitle {
-    margin: 0px;
-    padding: 20px;
+    margin: 0;
+    padding: 10px 5px;
     font-size: 20px;
 }
-
 #chckChoices {
-    display: block;
-    white-space: nowrap;
-    margin: 5px 0px;
+    display: inline;
+    margin: 5px 0;
 }
-
 #langParams {
-    font-family: Lucida Sans Unicode;
-    margin: 0px;
-    padding: 0px 20px;
+    font-family: Lucida Sans Unicode, Lucida, Arial;
+    margin: 0;
+    padding: 0 5px;
     font-size: 14px;
 }
-
 #langQuestion {
     background-color: lavender;
 }
-
 #langResult {
     background-color: lightyellow;
 }
-
 #langAnswer {
     background-color: aliceblue;
 }
-
 #textAnswer {
     background-color: aliceblue;
     width: 100%;
     border: none;
     box-sizing: border-box;
     text-align: center;
-    font-family: Lucida Sans Unicode;
+    font-family: Lucida Sans Unicode, Lucida, Arial;
     font-size: 14px;
 }
-
 .langButton{
     display: block;
     border: 2px solid black;
     border-radius: 25px;
-    margin: 20px;
-    padding: 20px;
+    margin: 10px 5px;
+    padding: 10px 5px;
     text-align: center;
     color: black;
     text-decoration: none;
 }
-
 #btnAnswer {
     background-color: lightgreen;
     font-size: 14px;
 }
-
 #btnAnswer:hover{
     background-color: limegreen;
 }
-
 @media screen and (min-width: 550px) {
     #chckChoices {
-        display: inline;
+        white-space: nowrap;
     }
     body, #langTitle, #textAnswer, #btnAnswer {
         font-size: 25px;
     }
-
+    .langDiv {
+        margin: 20px;
+        padding: 20px;
+    }
+    #langTitle {
+        padding: 20px;
+    }
+    #langParams {
+        padding: 0 20px;
+    }
+    .langButton{
+        margin: 20px;
+        padding: 20px;
+    }
 }

@@ -34,7 +34,6 @@ function _(text) {
     return text;
 }
 
-desktopApp = true;
 status = 0;
 /*
    0: Generating round
@@ -151,9 +150,9 @@ function doClean(text) {
 }
 
 function doNormal(text) {
-    if (desktopApp) {
+    try {
         text = text.normalize('NFD').replace(normal_reg, "");
-    } else {
+    } catch (ex) {
         for (var num in normal_repl) {
             repl = normal_repl[num];
             text = text.replace(repl[0], repl[1])
