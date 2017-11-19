@@ -34,7 +34,6 @@ function _(text) {
     return text;
 }
 
-desktopApp = true;
 status = 0;
 /*
    0: Generating round
@@ -53,6 +52,13 @@ genders = {
 note_reg = /\(([^\)]*)\)/g;
 clean_reg = /[^a-z\u00E0-\u00FCа-я]+/ig;
 normal_reg = /[\u0300-\u036f]/g;
+normal_repl = [
+    ["á","a"],["â","a"],["à","a"],["ä","a"],["ã","a"],
+    ["é","e"],["ê","e"],["è","e"],["ë","e"],["e","e"],
+    ["í","i"],["î","i"],["ì","i"],["ï","i"],
+    ["ó","o"],["ô","o"],["ò","o"],["ö","o"],["õ","o"],
+    ["ú","u"],["û","u"],["ù","u"],["ü","u"]
+];
 repeat_reg = /(.)\1{2,}/g;
 replacements = [["й", "и"], ["ы", "и"], ["щ", "ш"], ["в", "б"]];
 
@@ -144,10 +150,15 @@ function doClean(text) {
 }
 
 function doNormal(text) {
-    if (desktopApp) {
+    try {
         text = text.normalize('NFD').replace(normal_reg, "");
+    } catch (ex) {
+        for (var num in normal_repl) {
+            repl = normal_repl[num];
+            text = text.replace(repl[0], repl[1])
+        }
     }
-    for (num in replacements) {
+    for (var num in replacements) {
         replacement = replacements[num];
         text = text.replace(replacement[0], replacement[1])
     }

@@ -28,7 +28,6 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         //AndroidFullScreen.immersiveMode();
-        desktopApp = false;
         doReady();
     },
 };
