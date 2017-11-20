@@ -81,11 +81,11 @@ body, html {
 #btnAnswer:hover{
     background-color: limegreen;
 }
-@media screen and (min-width: 550px) {
+@media screen and (min-width: 340px) {
     #chckChoices {
         white-space: nowrap;
     }
-    body, #langTitle, #textAnswer, #btnAnswer {
+    #langTitle {
         font-size: 25px;
     }
     .langDiv {

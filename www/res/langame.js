@@ -34,33 +34,33 @@ function _(text) {
     return text;
 }
 
-status = 0;
+var status = 0;
 /*
    0: Generating round
    1: Round ready to play
    2: Gender ready to guess
 */
 
-i18n = { };
-idioms = ["EN", "PT", "ES", "IT", "CA", "FR", "RU"];
-genders = {
+var i18n = { };
+var idioms = ["EN", "PT", "ES", "IT", "CA", "FR", "RU"];
+var genders = {
     "M": "M, М",
     "F": "F, Ф, Ж",
     "N": "N, Н"
 };
 
-note_reg = /\(([^\)]*)\)/g;
-clean_reg = /[^a-z\u00E0-\u00FCа-я]+/ig;
-normal_reg = /[\u0300-\u036f]/g;
-normal_repl = [
+var note_reg = /\(([^\)]*)\)/g;
+var clean_reg = /[^a-z\u00E0-\u00FCа-я]+/ig;
+var normal_reg = /[\u0300-\u036f]/g;
+var normal_repl = [
     ["á","a"],["â","a"],["à","a"],["ä","a"],["ã","a"],
     ["é","e"],["ê","e"],["è","e"],["ë","e"],["e","e"],
     ["í","i"],["î","i"],["ì","i"],["ï","i"],
     ["ó","o"],["ô","o"],["ò","o"],["ö","o"],["õ","o"],
     ["ú","u"],["û","u"],["ù","u"],["ü","u"]
 ];
-repeat_reg = /(.)\1{2,}/g;
-replacements = [["й", "и"], ["ы", "и"], ["щ", "ш"], ["в", "б"]];
+var repeat_reg = /(.)\1{2,}/g;
+var replacements = [["й", "и"], ["ы", "и"], ["щ", "ш"], ["в", "б"], ["ь", ""], ["ъ", ""]];
 
 function doStart() {
     rounds = 0;
