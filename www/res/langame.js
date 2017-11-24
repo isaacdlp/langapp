@@ -49,6 +49,7 @@ var genders = {
     "N": "N, Н"
 };
 
+var split_reg = /, | \/ /g;
 var note_reg = /\(([^\)]*)\)/g;
 var clean_reg = /[^a-z\u00E0-\u00FCа-я]+/ig;
 var normal_reg = /[\u0300-\u036f]/g;
@@ -62,18 +63,29 @@ var normal_repl = [
 var repeat_reg = /(.)\1{2,}/g;
 var replacements = [["й", "и"], ["ы", "и"], ["щ", "ш"], ["в", "б"], ["ь", ""], ["ъ", ""]];
 
+var storage = null;
+
 function doStart() {
     rounds = 0;
     score = 0.0;
     points = 0;
 
     lang_index = $("select#selLangIndex option:selected")[0].value;
+    Cookies.set("lang", lang_index);
+    if (storage) {
+        storage.setItem("lang", lang_index);
+    }
     lang_focus = [];
     for (num in idioms) {
         idiom = idioms[num];
         if($("input#chk" + idiom)[0].checked) {
             lang_focus.push(idiom);
         }
+    }
+    var idis_a = lang_focus.join(",");
+    Cookies.set("list", idis_a);
+    if (storage) {
+        storage.setItem("list", idis_a);
     }
 
     num = $.inArray(lang_index, lang_focus);
@@ -171,7 +183,7 @@ function doEval(guess, solutions) {
     col = "lightpink";
     clean_guess = doClean(guess);
     normal_guess = doNormal(clean_guess);
-    sols = solutions.split(", ");
+    sols = solutions.split(split_reg);
     for (num in sols) {
         sol = sols[num];
         clean_sol = doClean(sol);
@@ -224,15 +236,28 @@ function doSolve() {
 
 function doReady() {
     q_params = getQueryParam();
+    var idi = Cookies.get("lang");
+    if (storage) {
+        idi = storage.getItem("lang");
+    }
     if ("lang" in q_params) {
-        var idi = q_params["lang"].toUpperCase();
-        var sel = $("select#selLangIndex option#sel" + idi);
+        var idi = q_params["lang"];
+    }
+    if (idi) {
+        var sel = $("select#selLangIndex option#sel" + idi.toUpperCase());
         if (sel.length > 0) {
             sel[0].selected = true;
         }
     }
+    var idis_a = Cookies.get("list");
+    if (storage) {
+        idis_a = storage.getItem("list");
+    }
     if ("list" in q_params) {
-        var idis = q_params["list"].toUpperCase().split(",").map(function (el) {
+        idis_a = q_params["list"];
+    }
+    if (idis_a) {
+        var idis = idis_a.toUpperCase().split(",").map(function (el) {
             return "chk" + el
         });
         var checks = $("#chckChoices input");

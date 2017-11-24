@@ -28,6 +28,7 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         //AndroidFullScreen.immersiveMode();
+        storage = window.localStorage;
         doReady();
     },
 };
