@@ -71,10 +71,6 @@ function doStart() {
     points = 0;
 
     lang_index = $("select#selLangIndex option:selected")[0].value;
-    Cookies.set("lang", lang_index);
-    if (storage) {
-        storage.setItem("lang", lang_index);
-    }
     lang_focus = [];
     for (num in idioms) {
         idiom = idioms[num];
@@ -82,9 +78,12 @@ function doStart() {
             lang_focus.push(idiom);
         }
     }
+
     var idis_a = lang_focus.join(",");
+    Cookies.set("lang", lang_index);
     Cookies.set("list", idis_a);
     if (storage) {
+        storage.setItem("lang", lang_index);
         storage.setItem("list", idis_a);
     }
 
@@ -236,25 +235,25 @@ function doSolve() {
 
 function doReady() {
     q_params = getQueryParam();
-    var idi = Cookies.get("lang");
+    var idi = null;
+    var idis_a = null;
+    idi = Cookies.get("lang");
+    idis_a = Cookies.get("list");
     if (storage) {
         idi = storage.getItem("lang");
+        idis_a = storage.getItem("list");
     }
     if ("lang" in q_params) {
-        var idi = q_params["lang"];
+        idi = q_params["lang"];
+    }
+    if ("list" in q_params) {
+        idis_a = q_params["list"];
     }
     if (idi) {
         var sel = $("select#selLangIndex option#sel" + idi.toUpperCase());
         if (sel.length > 0) {
             sel[0].selected = true;
         }
-    }
-    var idis_a = Cookies.get("list");
-    if (storage) {
-        idis_a = storage.getItem("list");
-    }
-    if ("list" in q_params) {
-        idis_a = q_params["list"];
     }
     if (idis_a) {
         var idis = idis_a.toUpperCase().split(",").map(function (el) {
