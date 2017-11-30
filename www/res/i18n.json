@@ -15,7 +15,7 @@
     "RIGHT" : "RIGHT",
     "ALMOST" : "ALMOST",
     "{0}! It is '{1}'" : "{0}! It is '{1}'",
-    "Which gender is it? [M]asculine, [N]eutral or [F]emenine?" : "Which gender is it? [M]asculine, [N]eutral or [F]emenine?"
+    "Which gender is it? [M]asculine, [N]eutral or [F]eminine?" : "Which gender is it? [M]asculine, [N]eutral or [F]eminine?"
   },
   "ES": {
     "Welcome to the Game!" : "Bienvenido al Juego!",
@@ -33,7 +33,7 @@
     "RIGHT" : "CORRECTO",
     "ALMOST" : "CASI BIEN",
     "{0}! It is '{1}'" : "{0}! Es '{1}'",
-    "Which gender is it? [M]asculine, [N]eutral or [F]emenine?" : "De qué género es? [M]asculino, [N]eutral or [F]emenino?"
+    "Which gender is it? [M]asculine, [N]eutral or [F]eminine?" : "De qué género es? [M]asculino, [N]eutral or [F]emenino?"
   },
   "PT": {
     "Welcome to the Game!" : "Bemvindo ao Jogo!",
@@ -51,7 +51,7 @@
     "RIGHT" : "CORRETO",
     "ALMOST" : "QUASE BOM",
     "{0}! It is '{1}'" : "{0}! É '{1}'",
-    "Which gender is it? [M]asculine, [N]eutral or [F]emenine?" : "Qual é o sexo? [M]asculino, [N]eutro ou [F]eminino?"
+    "Which gender is it? [M]asculine, [N]eutral or [F]eminine?" : "Qual é o sexo? [M]asculino, [N]eutro ou [F]eminino?"
   },
   "IT": {
     "Welcome to the Game!" : "Benvenuto al Gioco!",
@@ -69,7 +69,7 @@
     "RIGHT" : "CORRETTO",
     "ALMOST" : "QUASI BUONO",
     "{0}! It is '{1}'" : "{0}! È '{1}'",
-    "Which gender is it? [M]asculine, [N]eutral or [F]emenine?" : "Di quale genero è? [M]aschile, [N]eutrale or [F]emminile?"
+    "Which gender is it? [M]asculine, [N]eutral or [F]eminine?" : "Di quale genero è? [M]aschile, [N]eutrale or [F]emminile?"
   },
   "CA": {
     "Welcome to the Game!" : "Benvingut al Joc!",
@@ -87,7 +87,7 @@
     "RIGHT" : "CORRECTE",
     "ALMOST" : "GAIREBÉ",
     "{0}! It is '{1}'" : "{0}! És '{1}'",
-    "Which gender is it? [M]asculine, [N]eutral or [F]emenine?" : "De quin gènere és? [M]asculí, [N]eutre o [F]emení?"
+    "Which gender is it? [M]asculine, [N]eutral or [F]eminine?" : "De quin gènere és? [M]asculí, [N]eutre o [F]emení?"
   },
   "FR": {
     "Welcome to the Game!" : "Bienvenue au Jeu!",
@@ -105,7 +105,7 @@
     "RIGHT" : "CORREECT",
     "ALMOST" : "PRESQUE BIEN",
     "{0}! It is '{1}'" : "{0}! Est '{1}'",
-    "Which gender is it? [M]asculine, [N]eutral or [F]emenine?" : "De quel genre s’agit-il? [M]asculin, [N]eutre ou [F]éminin?"
+    "Which gender is it? [M]asculine, [N]eutral or [F]eminine?" : "De quel genre s’agit-il? [M]asculin, [N]eutre ou [F]éminin?"
   },
   "RU": {
     "Welcome to the Game!" : "Добро пожаловать в Игру!",
@@ -123,6 +123,6 @@
     "RIGHT" : "Корректный",
     "ALMOST" : "Почти хорошо",
     "{0}! It is '{1}'" : "{0}! Это '{1}'",
-    "Which gender is it? [M]asculine, [N]eutral or [F]emenine?" : "Какой именно пол? [М]ужской, [Н]ейтральный или [Ж]енственный?"
+    "Which gender is it? [M]asculine, [N]eutral or [F]eminine?" : "Какой именно пол? [М]ужской, [Н]ейтральный или [Ж]енственный?"
   }
 }

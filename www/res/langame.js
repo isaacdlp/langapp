@@ -214,7 +214,7 @@ function doSolve() {
             elem[0].innerHTML = _("{0}! It is '{1}'").format(tuple[0], sym);
             elem.css("background-color", tuple[2]);
             if (gen != null) {
-                $("#langQuestion")[0].innerHTML = _("Which gender is it? [M]asculine, [N]eutral or [F]emenine?");
+                $("#langQuestion")[0].innerHTML = _("Which gender is it? [M]asculine, [N]eutral or [F]eminine?");
                 status = 2;
             } else {
                 points *= 2;
